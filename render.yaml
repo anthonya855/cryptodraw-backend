@@ -3,7 +3,7 @@ services:
     name: cryptodraw-api
     runtime: node
     plan: free
-    buildCommand: npm install
+    buildCommand: cat .bootstrap/part* | base64 --decode > /tmp/cryptodraw-src.tgz && tar -xzf /tmp/cryptodraw-src.tgz -C . && npm install
     preDeployCommand: npm run migrate
     startCommand: npm start
     healthCheckPath: /health
