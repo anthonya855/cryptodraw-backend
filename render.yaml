@@ -3,20 +3,20 @@ services:
     name: cryptodraw-api
     runtime: node
     plan: free
-    buildCommand: base64 --decode .deploy/cryptodraw-backend-app-proxy.tgz.b64 > /tmp/cryptodraw-src.tgz && tar -xzf /tmp/cryptodraw-src.tgz -C . && npm install
-    startCommand: npm run migrate && npm start
+    buildCommand: npm install
+    startCommand: node src/migrate.js && node src/server.js
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
       - key: ALLOW_UNCONFIGURED_STARTUP
         value: "true"
+      - key: ALLOW_DIRECT_PUBLIC_API
+        value: "false"
       - key: DATABASE_URL
         fromDatabase:
           name: cryptodraw-db
           property: connectionString
-      - key: PUBLIC_ORIGINS
-        sync: false
       - key: ADMIN_PASSWORD
         sync: false
       - key: ADMIN_SESSION_SECRET
@@ -31,6 +31,8 @@ services:
         value: /apps/cryptodraw
       - key: SHOPIFY_PROXY_MAX_AGE_SECONDS
         value: "300"
+      - key: REOWN_PROJECT_ID
+        sync: false
       - key: EVM_NETWORKS_JSON
         sync: false
       - key: TRON_NETWORKS_JSON
