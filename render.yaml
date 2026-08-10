@@ -4,8 +4,7 @@ services:
     runtime: node
     plan: free
     buildCommand: cat .bootstrap/part* | base64 --decode > /tmp/cryptodraw-src.tgz && tar -xzf /tmp/cryptodraw-src.tgz -C . && sed -i 's/^assertProductionConfig();$/if (process.env.ALLOW_UNCONFIGURED_STARTUP !== "true") assertProductionConfig();/' src/server.js && npm install
-    preDeployCommand: npm run migrate
-    startCommand: npm start
+    startCommand: npm run migrate && npm start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
