@@ -3,7 +3,7 @@ services:
     name: cryptodraw-api
     runtime: node
     plan: free
-    buildCommand: cat .bootstrap/part* | base64 --decode > /tmp/cryptodraw-src.tgz && tar -xzf /tmp/cryptodraw-src.tgz -C . && sed -i 's/^assertProductionConfig();$/if (process.env.ALLOW_UNCONFIGURED_STARTUP !== "true") assertProductionConfig();/' src/server.js && npm install
+    buildCommand: base64 --decode .deploy/cryptodraw-backend-app-proxy.tgz.b64 > /tmp/cryptodraw-src.tgz && tar -xzf /tmp/cryptodraw-src.tgz -C . && npm install
     startCommand: npm run migrate && npm start
     healthCheckPath: /health
     envVars:
@@ -23,6 +23,14 @@ services:
         generateValue: true
       - key: ADMIN_SESSION_HOURS
         value: "12"
+      - key: SHOPIFY_API_SECRET
+        sync: false
+      - key: SHOPIFY_SHOP_DOMAIN
+        value: vpm72x-ic.myshopify.com
+      - key: SHOPIFY_PROXY_PATH
+        value: /apps/cryptodraw
+      - key: SHOPIFY_PROXY_MAX_AGE_SECONDS
+        value: "300"
       - key: EVM_NETWORKS_JSON
         sync: false
       - key: TRON_NETWORKS_JSON
