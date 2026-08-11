@@ -3,7 +3,7 @@ services:
     name: cryptodraw-api
     runtime: node
     plan: free
-    buildCommand: base64 --decode .deploy/cryptodraw-backend-app-proxy.tgz.b64 > /tmp/cryptodraw-src.tgz && tar -xzf /tmp/cryptodraw-src.tgz -C . && npm install
+    buildCommand: cat .deploy/full/part* | base64 --decode > /tmp/cryptodraw-backend.tgz && tar -xzf /tmp/cryptodraw-backend.tgz -C . && npm install
     startCommand: node src/migrate.js && node src/server.js
     healthCheckPath: /health
     envVars:
