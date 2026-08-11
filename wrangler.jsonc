@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cryptodraw-api",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-08-11",
+  "workers_dev": true,
+  "vars": {
+    "SHOPIFY_SHOP_DOMAIN": "vpm72x-ic.myshopify.com",
+    "SHOPIFY_PROXY_PATH": "/apps/cryptodraw",
+    "SHOPIFY_PROXY_MAX_AGE_SECONDS": "300",
+    "SEED_POOL_ID": "POOL-2026-0142",
+    "SEED_POOL_PRIZE": "0.42 BTC",
+    "SEED_POOL_PRIZE_USD": "$27,300",
+    "SEED_POOL_ENTRY_FEE_USDT": "1.000000",
+    "SEED_POOL_MAX_ENTRIES": "25000",
+    "DRAND_BASE_URL": "https://api.drand.sh"
+  }
+}
