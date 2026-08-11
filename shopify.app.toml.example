@@ -1,0 +1,11 @@
+name = "CryptoDraw"
+application_url = "https://shopify.dev/apps/default-app-home"
+embedded = false
+
+[access_scopes]
+scopes = "write_app_proxy"
+
+[app_proxy]
+url = "https://cryptodraw-backend.anthonya-peters81.workers.dev/apps/cryptodraw"
+prefix = "apps"
+subpath = "cryptodraw"
